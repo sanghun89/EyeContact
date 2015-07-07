@@ -14,10 +14,6 @@ const src = Object.create(null);
 
 let watch = false;
 
-gulp.task('test', () => {
-    console.log('here');
-});
-
 // Clean output directory
 gulp.task('clean', cb => {
     del(['.tmp', 'build/*', '!build/.git'], {dot: true}, () => {
@@ -81,7 +77,7 @@ gulp.task('bundle', cb => {
     }
 });
 
-// Build the express from source code
+// Build the app from source code
 gulp.task('build', ['clean'], cb => {
     runSequence(['assets', 'resources'], ['bundle'], cb);
 });
@@ -97,7 +93,7 @@ gulp.task('build:watch', cb => {
 });
 
 // Launch a Node.js/Express server
-gulp.task('serve', ['clean', 'build'], cb => {
+gulp.task('serve', ['clean', 'build:watch'], cb => {
     src.server = [
         'build/server.js',
         'build/template/**/*'
@@ -127,4 +123,4 @@ gulp.task('serve', ['clean', 'build'], cb => {
 });
 
 // The default task
-gulp.task('default', ['test']);
+gulp.task('default', ['serve']);
