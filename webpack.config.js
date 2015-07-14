@@ -67,6 +67,14 @@ const appConfig = merge({}, config, {
     )
 });
 
+appConfig.module.loaders = appConfig.module.loaders.concat([
+    {
+
+    }
+]);
+
+
+
 
 //
 // Configuration for the server-side bundle (server.js)
