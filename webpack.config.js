@@ -1,6 +1,8 @@
 import webpack, { DefinePlugin, BannerPlugin } from 'webpack';
 import merge from 'lodash/object/merge';
 import minimist from 'minimist';
+import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const argv = minimist(process.argv.slice(2));
 const DEBUG = !argv.release;
@@ -58,7 +60,7 @@ const appConfig = merge({}, config, {
     },
     devtool: DEBUG ? 'source-map' : false,
     plugins: config.plugins.concat([
-            new DefinePlugin(merge(GLOBALS, {'__SERVER__': false}))
+            new DefinePlugin(merge(GLOBALS, {'__SERVER__': false})),
         ].concat(DEBUG ? [] : [
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin(),
@@ -66,12 +68,6 @@ const appConfig = merge({}, config, {
         ])
     )
 });
-
-appConfig.module.loaders = appConfig.module.loaders.concat([
-    {
-
-    }
-]);
 
 
 
