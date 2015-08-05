@@ -1,10 +1,13 @@
 import React from 'react';
+import Navbar from './Navbar';
+import ToolContainer from './ToolContainer';
 
 class Main extends React.Component {
     render() {
         return (
             <div className="main-container">
-                Hello World
+                <Navbar />
+                <ToolContainer/>
             </div>
         );
     }
