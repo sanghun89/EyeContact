@@ -102,6 +102,8 @@ gulp.task('serve', ['clean', 'build:watch'], cb => {
     let server = (function startup() {
         const child = cp.fork('build/server.js', {
             env: Object.assign({NODE_ENV: 'development'}, process.env)
+        }, {
+            execArgv :['--harmony']
         });
         child.once('message', message => {
             if (message.match(/^online$/)) {

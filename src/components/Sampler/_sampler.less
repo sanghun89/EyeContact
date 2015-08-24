@@ -1,0 +1,67 @@
+.sampler-container {
+    position: absolute;
+    background: fade(@yellow-color, 40%);
+    overflow: visible;
+    top: 0px;
+    left: 0px;
+    cursor: move;
+}
+
+@sampler-node-size: 6px;
+.sampler-node {
+    position: absolute;
+    width: @sampler-node-size;
+    height: @sampler-node-size;
+    margin-top: -1 * (@sampler-node-size/2);
+    margin-left: -1 * (@sampler-node-size/2);
+    background: #0C0C0C;
+    z-index: 1;
+
+    &:nth-child(1) {
+        top: 0%;
+        left: 0%;
+        cursor: nwse-resize;
+    }
+
+    &:nth-child(2) {
+        top: 0%;
+        left:50%;
+        cursor: ns-resize;
+    }
+
+    &:nth-child(3) {
+        top: 0%;
+        left: 100%;
+        cursor: nesw-resize;
+    }
+
+    &:nth-child(4) {
+        top: 50%;
+        left: 0%;
+        cursor: ew-resize;
+    }
+
+    &:nth-child(5) {
+        top: 50%;
+        left: 100%;
+        cursor: ew-resize;
+    }
+
+    &:nth-child(6) {
+        top: 100%;
+        left: 0%;
+        cursor: nesw-resize;
+    }
+
+    &:nth-child(7) {
+        top: 100%;
+        left: 50%;
+        cursor: ns-resize;
+    }
+
+    &:nth-child(8) {
+        top: 100%;
+        left: 100%;
+        cursor: nwse-resize;
+    }
+}

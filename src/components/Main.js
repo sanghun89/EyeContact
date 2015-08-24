@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
-import ToolContainer from './ToolContainer';
+import Navbar from './Navbar/Navbar';
+import ToolContainer from './ToolContainer/ToolContainer';
 
 class Main extends React.Component {
     render() {
