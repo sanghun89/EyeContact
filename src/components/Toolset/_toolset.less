@@ -1,19 +1,27 @@
 .stopped {
-    .stop-record {
+    .stop-record, .loader {
         display: none;
     }
 
     .start-record {
       display: block;
     }
+
+    .input-group {
+      display: table;
+    }
 }
 
 .started {
-    .stop-record {
+    .stop-record, .loader {
       display: block;
     }
 
-    .start-record {
+    .start-record, .input-group {
       display: none;
     }
+}
+
+.loader {
+    padding: 50px 15px;
 }

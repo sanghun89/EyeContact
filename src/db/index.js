@@ -6,12 +6,14 @@ import mongoose from 'mongoose';
 
 let db = mongoose.connect(DATABASE_URI).connection;
 
+import './models';
+
+console.log(chalk.yellow('Opening connection to MongoDB . . .'));
+
 let startDbPromise = new Promise((resolve, reject) => {
     db.on('open', resolve);
     db.on('error', reject);
 });
-
-console.log(chalk.yellow('Opening connection to MongoDB . . .'));
 
 startDbPromise.then(function () {
     console.log(chalk.green('MongoDB connection opened!'));

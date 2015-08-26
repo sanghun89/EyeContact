@@ -3,6 +3,7 @@ import VideoIntent from '../../intents/video-intent';
 import config from '../../config/video.config';
 import Sampler from '../Sampler/Sampler';
 
+
 class Video extends React.Component {
     constructor(props) {
         super(props);
@@ -23,8 +24,7 @@ class Video extends React.Component {
             <div style={{
                 position: 'relative',
                 width: config.width,
-                height: config.height,
-                margin: '0 auto'
+                height: config.height
             }}>
                 <canvas ref="videoCanvas"></canvas>
                 <Sampler SampleState={this.props.SampleState}/>

@@ -91,11 +91,18 @@ function determineDimensions(data) {
             dimensions.left = data.originState.left + data.pageX;
             dimensions.top = data.originState.top + data.pageY;
             break;
+        case 'change':
+            dimensions.width = data.width;
+            dimensions.height = data.height;
+            break;
     }
 
     return dimensions;
 }
 
+/*
+ Set bounds
+ */
 function applyBounds(dimensions, data) {
     if (typeof dimensions.width !== 'undefined') {
         dimensions.width = dimensions.width > config.width ? config.width : dimensions.width;
@@ -108,7 +115,7 @@ function applyBounds(dimensions, data) {
         dimensions.height = dimensions.height < 0 ? 0 : dimensions.height;
     }
 
-    if (data.direction === 'omni') {
+    if (data && data.direction === 'omni') {
         if (typeof dimensions.left !== 'undefined') {
             dimensions.left = dimensions.left > config.width - data.originState.width ? config.width - data.originState.width : dimensions.left;
             dimensions.left = dimensions.left < 0 ? 0 : dimensions.left;
@@ -140,10 +147,22 @@ function resizeSample(context) {
     });
 }
 
+function changeSize(dimensions) {
+    dimensions = applyBounds(dimensions);
+    state = update(state, {
+        $merge : dimensions
+    });
+
+    subject.onNext(state);
+}
+
 SamplerIntent.subject.subscribe((payload) => {
     switch (payload.key) {
         case SamplerKey.SAMPLE_RESIZE:
             resizeSample(payload.context);
+            break;
+        case SamplerKey.SAMPLE_SET_DIM:
+            changeSize(payload.dimensions);
             break;
         default:
             console.warn(`${payload.key} not recognized in model.`);

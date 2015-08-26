@@ -8,21 +8,17 @@ import _ from 'lodash';
 
 let subject = new Rx.ReplaySubject(1),
     state = {
-        name: '',
         recordStatus : 'stopped',
-        data :{
-            img :[],
-            classification : []
-        }
+        img :[]
+    };
+
+let staticSubject = new Rx.ReplaySubject(1),
+    staticVar = {
+        dataLen : 0
     };
 
 subject.onNext(state);
-
-function saveRecord() {
-    return Rx.Observable.create((observer) => {
-
-    });
-}
+staticSubject.onNext(staticVar);
 
 function startAndStopRecord(events) {
     let starts = Rx.Observable.fromEvent(events.startRecord, 'click');
@@ -45,6 +41,7 @@ function startAndStopRecord(events) {
                 }
             });
         }).concatAll().takeUntil(stops).doOnCompleted(() => {
+            console.log(state);
             state = update(state, {
                 $merge : {
                     recordStatus : 'stopped'
@@ -56,8 +53,14 @@ function startAndStopRecord(events) {
 
     source.subscribe((context) => {
         let {left, top, width, height} = SampleState;
-        let imgData = context.getImageData(left, top, width, height);
-        console.log(imgData);
+        let imgData = _.chain(context.getImageData(left, top, width, height).data)
+                        .chunk(4)
+                        .map((rgba) => ((rgba[0] + rgba[1] + rgba[2]) / (255 * 3)))
+                        .value();
+
+        state.img.push(imgData);
+        staticVar.dataLen = state.img.length;
+        staticSubject.onNext(staticVar);
     });
 }
 
@@ -76,6 +79,7 @@ RecordIntent.subject.subscribe((payload) => {
 });
 
 export default {
-    subject
+    subject,
+    staticSubject
 };
 

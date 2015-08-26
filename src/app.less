@@ -4,6 +4,27 @@ body {
     font-weight: 300;
 }
 
+hr {
+    border-color: #CCC;
+}
+
+.glyphicon-refresh-animate {
+  animation-name: rotateThis;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotateThis {
+  from {
+    transform: rotate( 0deg );
+  }
+  to  {
+    transform: rotate( 360deg );
+  }
+}
+
+
 @import "less-util/_variables";
 @import "less-util/_mixin";
 @import "components/Sampler/_sampler";

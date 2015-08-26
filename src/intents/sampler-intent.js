@@ -10,5 +10,11 @@ export default {
             key : Keys.SAMPLE_RESIZE,
             context
         });
+    },
+    changeSize(dimensions) {
+        subject.onNext({
+            key: Keys.SAMPLE_SET_DIM,
+            dimensions
+        });
     }
 };

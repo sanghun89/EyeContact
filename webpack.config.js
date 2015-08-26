@@ -83,7 +83,6 @@ const appConfig = merge({}, config, {
 
 
 
-
 //
 // Configuration for the server-side bundle (server.js)
 // -----------------------------------------------------------------------------
