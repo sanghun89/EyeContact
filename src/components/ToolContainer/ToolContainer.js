@@ -45,9 +45,9 @@ class ToolContainer extends React.Component {
                 </div>
                 <div className="col-lg-6">
                     <Toolset />
-                    <hr />
+                    <br /><hr />
                     <Trainset />
-                    <hr />
+                    <br /><hr />
                     <Testset />
                 </div>
             </div>
